@@ -1,0 +1,20 @@
+{
+    "prettier.singleQuote": true,
+    "prettier.htmlWhitespaceSensitivity": "strict",
+    "prettier.jsxSingleQuote": true,
+    "prettier.printWidth": 50,
+    "prettier.proseWrap": "always",
+    "prettier.trailingComma": "all",
+    "prettier.useTabs": true,
+    "prettier.vueIndentScriptAndStyle": true,
+    "beautify.config": "",
+    "emmet.excludeLanguages": [
+
+        "markdown"
+    ],
+    "emmet.includeLanguages": {
+        "javascript":"javascriptreact"
+    },
+    "compile-hero.disable-compile-files-on-did-save-code": false,
+    "editor.defaultFormatter": "esbenp.prettier-vscode"
+}
