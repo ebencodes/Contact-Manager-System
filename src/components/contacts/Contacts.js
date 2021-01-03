@@ -5,8 +5,6 @@ import Contact from './Contact';
 import { Consumer } from '../../Context';
 
 export class Contacts extends Component {
-	//mehod to delete a component
-
 	render() {
 		return (
 			/**To access anything from the context Api, we need to wrap

@@ -15,6 +15,15 @@ const reducer = (state, action) => {
 				),
 			};
 
+		case 'ADD-CONTACT':
+			return {
+				...state,
+				contact: [
+					action.payload,
+					...state.contacts,
+				],
+			};
+
 		default:
 			return state;
 	}
@@ -60,7 +69,7 @@ export class Provider extends Component {
 			),
 	};
 
-	// This gives off a value that holds the state(value = {this.state})
+	// This gives off a value that holds the state. (value = {this.state})
 	render() {
 		return (
 			<Context.Provider value={this.state}>
