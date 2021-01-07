@@ -6,7 +6,7 @@ class Contact extends Component {
 	state = {
 		showContactInfo: false,
 	};
-	// dispatch(action) = newState
+
 	/**action = {
 	 * type: 'DELETE_CONTACT',
 	 * payload: 'id'} */
@@ -15,7 +15,7 @@ class Contact extends Component {
 		dispatch({
 			type: 'DELETE_CONTACT',
 			payload: id,
-		});
+		}); // what is passsed into the dispatch is the action
 	};
 
 	render() {

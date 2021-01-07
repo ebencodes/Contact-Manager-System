@@ -15,10 +15,10 @@ const reducer = (state, action) => {
 				),
 			};
 
-		case 'ADD-CONTACT':
+		case 'ADD_CONTACT':
 			return {
 				...state,
-				contact: [
+				contacts: [
 					action.payload,
 					...state.contacts,
 				],
