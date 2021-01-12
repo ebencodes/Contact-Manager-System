@@ -4,7 +4,7 @@ import axios from 'axios';
 //import * as uuid from 'uuid';
 import TextInputGroup from '../layouts/TextInputGroup';
 
-export class AddContact extends Component {
+export class EditContact extends Component {
 	state = {
 		name: '',
 		email: '',
@@ -12,6 +12,18 @@ export class AddContact extends Component {
 		errors: {},
 	};
 
+	async componentDidMount() {
+		const { id } = this.props.match.params;
+		const result = await axios.get(
+			`https://jsonplaceholder.typicode.com/users/${id}`,
+		);
+		const contact = result.data;
+		this.setState({
+			name: contact.name,
+			email: contact.email,
+			phone: contact.phone,
+		});
+	}
 	onSubmit = async (dispatch, e) => {
 		e.preventDefault();
 
@@ -39,33 +51,22 @@ export class AddContact extends Component {
 			return;
 		}
 
-		const newContact = {
-			//id: uuid.v1(),
+		const updatedContact = {
 			name,
 			email,
 			phone,
 		};
 
-		//using .then
-		/**axios
-			.post(
-				'https://jsonplaceholder.typicode.com/users',
-				newContact,
-			)
-			.then((result) =>
-				dispatch({
-					type: 'ADD_CONTACT',
-					payload: result.data,
-				}),
-			);**/
+		//Getting the ID
+		const { id } = this.props.match.params;
 
-		//using AsyncAwait
-		const result = await axios.post(
-			'https://jsonplaceholder.typicode.com/users',
-			newContact,
+		const result = await axios.put(
+			`https://jsonplaceholder.typicode.com/users/${id}`,
+			updatedContact,
 		);
+
 		dispatch({
-			type: 'ADD_CONTACT',
+			type: 'UPDATE_CONTACT',
 			payload: result.data,
 		});
 
@@ -104,7 +105,7 @@ export class AddContact extends Component {
 						<div>
 							<div className='card mb-3'>
 								<div className='card-header'>
-									Add Contact
+									Edit Contact
 								</div>
 								<div className='card-body'>
 									<form
@@ -142,7 +143,7 @@ export class AddContact extends Component {
 										/>
 										<input
 											type='submit'
-											value='Add Contact'
+											value='Update Contact'
 											className='btn btn-block btn-danger btn-lg'
 										/>
 									</form>
@@ -156,4 +157,4 @@ export class AddContact extends Component {
 	}
 }
 
-export default AddContact;
+export default EditContact;

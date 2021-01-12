@@ -1,21 +1,49 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { Consumer } from '../../Context';
+import axios from 'axios';
+import { Link } from 'react-router-dom';
 
 class Contact extends Component {
 	state = {
 		showContactInfo: false,
 	};
 
-	/**action = {
-	 * type: 'DELETE_CONTACT',
-	 * payload: 'id'} */
+	//using .then
+	/**onDeleteClick = (id, dispatch) => {
+		axios
+			.delete(
+				`https://jsonplaceholder.typicode.com/users/${id}`,
+			)
+			// what is passsed into the dispatch is the action
+			.then((result) =>
+				dispatch({
+					type: 'DELETE_CONTACT',
+					payload: id,
+				}),
+			);
+	};**/
 
-	onDeleteClick = (id, dispatch) => {
-		dispatch({
-			type: 'DELETE_CONTACT',
-			payload: id,
-		}); // what is passsed into the dispatch is the action
+	//using AsyncAwait
+	onDeleteClick = async (id, dispatch) => {
+		try {
+			await axios.delete(
+				`https://jsonplaceholder.typicode.com/users/${id}`,
+			);
+			dispatch({
+				type: 'DELETE_CONTACT',
+				payload: id,
+			});
+		} catch (e) {
+			// what is passsed into the dispatch is the action
+			/**action = {
+			 * type: 'DELETE_CONTACT',
+			 * payload: 'id'} */
+			dispatch({
+				type: 'DELETE_CONTACT',
+				payload: id,
+			});
+		}
 	};
 
 	render() {
@@ -66,6 +94,17 @@ class Contact extends Component {
 											dispatch,
 										)}
 									></i>
+									<Link to={`/edit/${id}`}>
+										<i
+											className='fas fa-pencil-alt'
+											style={{
+												float: 'right',
+												color: 'black',
+												cursor: 'pointer',
+												marginRight: '1rem',
+											}}
+										></i>
+									</Link>
 								</h4>
 								{showContactInfo ? (
 									<ul className='list-group'>
